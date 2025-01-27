@@ -1,0 +1,24 @@
+###Signup User 
+POST http://localhost:3000/users/signup
+Content-Type: application/json
+
+{
+    "name": "Roshan Tiwari",
+    "email": "roshan@gmail.com",
+    "password": "password",
+    "role": "attendee"
+    
+}
+
+
+###Login
+POST http://localhost:3000/users/login 
+Content-Type: application/json
+
+{
+    "email": "rojan@gmail.com",
+    "password": "password"  
+}
+
+###Find All User
+GET  http://localhost:3000/users/findAllUser 
