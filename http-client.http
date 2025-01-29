@@ -3,22 +3,46 @@ POST http://localhost:3000/users/signup
 Content-Type: application/json
 
 {
-    "name": "Roshan Tiwari",
-    "email": "roshan@gmail.com",
+    "name": "Rojina Tiwari1",
+    "email": "rojina@gmail.com",
     "password": "password",
-    "role": "attendee"
-    
+    "role":"organizer"
+ 
 }
 
 
 ###Login
-POST http://localhost:3000/users/login 
+POST http://localhost:3000/users/signin 
 Content-Type: application/json
 
 {
-    "email": "rojan@gmail.com",
-    "password": "password"  
+    "email": "rojina@gmail.com",
+    "password": "password",
+    "role":"organizer"  
 }
 
 ###Find All User
-GET  http://localhost:3000/users/findAllUser 
+GET  http://localhost:3000/users/findalluser 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE1LCJlbWFpbCI6InJvamFuQGdtYWlsLmNvbSIsImlhdCI6MTczODE2Mjg2NywiZXhwIjoxNzM4MTYzNzY3fQ.yS0NXQS6oCbwzudaAZoeW8ns5XZ9R842Z9xpoXFgVSM
+
+
+###Find By Id
+GET  http://localhost:3000/users/16
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE1LCJlbWFpbCI6InJvamFuQGdtYWlsLmNvbSIsImlhdCI6MTczODE2Mjg2NywiZXhwIjoxNzM4MTYzNzY3fQ.yS0NXQS6oCbwzudaAZoeW8ns5XZ9R842Z9xpoXFgVSM
+
+
+##Get Profile by Jwt token
+GET  http://localhost:3000/users/profile 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE1LCJlbWFpbCI6InJvamFuQGdtYWlsLmNvbSIsImlhdCI6MTczODE2Mjg2NywiZXhwIjoxNzM4MTYzNzY3fQ.yS0NXQS6oCbwzudaAZoeW8ns5XZ9R842Z9xpoXFgVSM
+
+
+
+##update User profile
+PATCH http://localhost:3000/users/updateProfile
+
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE1LCJlbWFpbCI6InJvamFuQGdtYWlsLmNvbSIsImlhdCI6MTczODE2Mjg2NywiZXhwIjoxNzM4MTYzNzY3fQ.yS0NXQS6oCbwzudaAZoeW8ns5XZ9R842Z9xpoXFgVSM
+
+{
+    "name":"Rojan Tiwari"
+}
+
