@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { PrismaService } from 'src/prismaService/prisma.service';
@@ -39,18 +39,37 @@ export class EventsService {
     return this.prismaService.event.findMany({ include: { user: true } });
   }
 
+
   findOne(id: number) {
     return this.prismaService.event.findUnique({
-      where: { id: id }
+      where: { id }
     });
   }
 
 
-  update(id: number, updateEventDto: UpdateEventDto) {
-    return `This action updates a #${id} event`;
+  async update(id: number, updateEventDto: UpdateEventDto) {
+
+    try {
+      const updateEvent = await this.prismaService.event.update({
+        where: { id },
+        data: updateEventDto,
+      });
+      return updateEvent;
+
+    } catch (error) {
+      throw new InternalServerErrorException('Error updating booking');
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} event`;
+
+  async remove(id: number) {
+    try {
+      const removedBooking = await this.prismaService.event.delete({
+        where: { id },
+      });
+      return removedBooking;
+    } catch (error) {
+      throw new InternalServerErrorException('Error removing event');
+    }
   }
 }

@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from './prismaService/prisma.module';
 import { EventsModule } from './events/events.module';
 import { BookingsModule } from './bookings/bookings.module';
+import { TicketsModule } from './tickets/tickets.module';
 
 
 
@@ -21,7 +22,8 @@ import { BookingsModule } from './bookings/bookings.module';
     }),
     UsersModule,
     EventsModule,
-    BookingsModule
+    BookingsModule,
+    TicketsModule
   ],
   controllers: [AppController],
   providers: [AppService],

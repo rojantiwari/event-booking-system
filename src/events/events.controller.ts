@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, BadRequestException } from '@nestjs/common';
 import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
@@ -13,7 +13,7 @@ export class EventsController {
   @UseGuards(JwtGuard)
   @Post('create')
   create(@GetUser() user: User, @Body() createEventDto: CreateEventDto) {
-    if (user.role == 'attendee') {
+    if (user.role == 'attendee' || user.role == 'admin') {
       throw new Error(`This provided user ${user.name} doesnot have credential to create event`)
     }
 
@@ -31,13 +31,18 @@ export class EventsController {
     return this.eventsService.findOne(+id);
   }
 
+  @UseGuards(JwtGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateEventDto: UpdateEventDto) {
     return this.eventsService.update(+id, updateEventDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
+  @UseGuards(JwtGuard)
+  @Delete('deleteevents')
+  remove(@Param('id') id: string, @GetUser() user: User) {
+    if (user.role == 'attendee') {
+      throw new BadRequestException('You does not have credential to delete')
+    }
     return this.eventsService.remove(+id);
   }
 }

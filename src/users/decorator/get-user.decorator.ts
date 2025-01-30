@@ -1,4 +1,4 @@
-import { createParamDecorator, ExecutionContext } from "@nestjs/common";
+import { createParamDecorator, ExecutionContext, Injectable } from "@nestjs/common";
 
 
 export const GetUser = createParamDecorator(
@@ -7,11 +7,9 @@ export const GetUser = createParamDecorator(
             ctx
                 .switchToHttp()
                 .getRequest()
-
         // if (data) {
         //     return request.user[data]
         // }
-
         return request.user
     }
 )
